@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="fr.webini.nico.freethecoffee.MainActivity">
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent">
+
+        <TextView
+            android:id="@+id/noTagText"
+            android:layout_width="135dp"
+            android:layout_height="25dp"
+            android:layout_above="@+id/amountInput"
+            android:layout_centerHorizontal="true"
+            android:text="Pas de tag dispo"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            tools:layout_editor_absoluteX="125dp"
+            tools:layout_editor_absoluteY="177dp" />
+
+        <EditText
+            android:id="@+id/amountInput"
+            android:layout_width="215dp"
+            android:layout_height="46dp"
+            android:ems="10"
+            android:hint="Crédit"
+            android:layout_centerHorizontal="true"
+            android:layout_above="@+id/editButton"
+            android:inputType="numberDecimal"
+            android:visibility="invisible" />
+
+        <Button
+            android:id="@+id/editButton"
+            android:layout_width="88dp"
+            android:layout_height="48dp"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:layout_gravity="center"
+            android:text="Modifier"
+            android:visibility="invisible" />
+
+    </RelativeLayout>
+</android.support.constraint.ConstraintLayout>

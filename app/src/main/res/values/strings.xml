@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">FreeTheCoffee</string>
+    <string name="tag_detected">NFC Tag Detected !</string>
+    <string name="unsupported_tag">Unsupported NFC tag</string>
+    <string name="invalid_tag">Invalid coffee tag</string>
+    <string name="io_error">IO error</string>
+    <string name="amount_max">Amount can\'t exceed 65 535</string>
+    <string name="amount_min">Amount can\'t be less than 0</string>
+    <string name="no_tag">No tag available</string>
+</resources>
