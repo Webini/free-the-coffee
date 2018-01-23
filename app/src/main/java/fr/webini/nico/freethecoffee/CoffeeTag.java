@@ -67,15 +67,27 @@ public class CoffeeTag {
     }
 
     public void setAmount(Integer amount) throws IOException {
-        byte[] moneyBlock = tag.readBlock(tag.sectorToBlock(2));
-        Log.d(CoffeeTag.class.getSimpleName(), Tools.toString(moneyBlock));
+        int sector = tag.sectorToBlock(2);
+        byte[] firstMoneyBlock = tag.readBlock(sector);
+        byte[] secMoneyBlock = tag.readBlock(sector + 1);
+        byte[] unkThirdBlock = tag.readBlock(sector + 2);
+        Log.d(CoffeeTag.class.getSimpleName(),
+                Tools.toString(firstMoneyBlock) + " // " +
+                Tools.toString(secMoneyBlock) + " // " +
+                Tools.toString(unkThirdBlock));
         byte[] bAmount = { (byte)((amount >> 8) & 0xFF), (byte)(amount & 0xFF) };
-        moneyBlock[0] = bAmount[0];
-        moneyBlock[1] = bAmount[1];
-        moneyBlock[2] = bAmount[0];
-        moneyBlock[3] = bAmount[1];
-        Log.d(CoffeeTag.class.getSimpleName(), Tools.toString(moneyBlock));
-        tag.writeBlock(tag.sectorToBlock(2), moneyBlock);
+        firstMoneyBlock[0] = secMoneyBlock[0] = bAmount[0];
+        firstMoneyBlock[1] = secMoneyBlock[1] = bAmount[1];
+        firstMoneyBlock[2] = secMoneyBlock[2] = bAmount[0];
+        firstMoneyBlock[3] = secMoneyBlock[3] = bAmount[1];
+        firstMoneyBlock[15] = (byte)0x38;
+        secMoneyBlock[15] = (byte)0x37;
+        unkThirdBlock[0] = (byte)0xAA;
+        unkThirdBlock[1] = (byte)0x38;
+
+        tag.writeBlock(sector, firstMoneyBlock);
+        tag.writeBlock(sector + 1, secMoneyBlock);
+        tag.writeBlock(sector + 2, unkThirdBlock);
     }
 
     public void close() throws IOException {
